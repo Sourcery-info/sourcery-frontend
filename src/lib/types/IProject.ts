@@ -1,0 +1,12 @@
+export interface IProject {
+    urlid: string | null;
+    name: string;
+    description: string;
+    notes: string;
+    created_at: Date | null;
+    updated_at: Date | null;
+    vector_model: string;
+    chat_model: string;
+    tags: string[];
+    security: string;
+}

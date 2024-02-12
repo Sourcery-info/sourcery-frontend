@@ -22,8 +22,10 @@
                                     <p>
                                         <Button color="primary" href="/chat/{project.urlid}">Chat</Button>
                                         <Button color="secondary" href="/project/upload/{project.urlid}">Upload</Button>
+                                        <Button color="secondary" href="/index/{project.urlid}">Index</Button>
                                         <Button color="secondary" href="/project/edit/{project.urlid}">Edit</Button>
                                     </p>
+                                    
                                 </CardBody>
                             </Card>
                         </Col>
