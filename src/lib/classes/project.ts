@@ -2,7 +2,6 @@ import friendlyURL from "$lib/utils/friendlyurl";
 import { PROJECT_DIR } from "$lib/variables";
 import path from "path";
 import fs from "fs";
-import { getFiles } from "$lib/utils/files";
 import type { IProject } from "$lib/types/IProject";
 
 export default class Project {

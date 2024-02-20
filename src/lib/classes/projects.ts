@@ -23,7 +23,9 @@ export default class Projects {
         });
     }
 
-    get_project(urlid: string) {
-        return this.projects.find(project => project.urlid === urlid);
+    get_project(urlid: string): IProject {
+        const project = this.projects.find(project => project.urlid === urlid);
+        if (!project) throw new Error('Project not found');
+        return project;
     }
 }

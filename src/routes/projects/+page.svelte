@@ -7,7 +7,7 @@
 <Container class="mt-4">
     <Row>
         <Col xs="auto">
-            <Button size="xl" color="primary" href="/project/new">New Project</Button>
+            <Button size="xl" color="primary" href="/new">New Project</Button>
         </Col>
         <Col>
             <Container>
@@ -21,9 +21,10 @@
                                     <p>{project.created_at}</p>
                                     <p>
                                         <Button color="primary" href="/chat/{project.urlid}">Chat</Button>
-                                        <Button color="secondary" href="/project/upload/{project.urlid}">Upload</Button>
+                                        <Button color="secondary" href="/upload/{project.urlid}">Upload</Button>
+                                        <Button color="secondary" href="/files/{project.urlid}">Files</Button>
                                         <Button color="secondary" href="/index/{project.urlid}">Index</Button>
-                                        <Button color="secondary" href="/project/edit/{project.urlid}">Edit</Button>
+                                        <Button color="secondary" href="/edit/{project.urlid}">Edit</Button>
                                     </p>
                                     
                                 </CardBody>
