@@ -20,17 +20,19 @@
     async function handleSubmit(event: SubmitEvent) {
         if (input === "") return;
         event.preventDefault();
+        const query = input;
+        input = "";
         thinking = true;
-        messages.push({ type: "input", content: input });
+        messages.push({ type: "input", content: query });
+        messages = messages;
         const response = await fetch(`/chat/${data.project}/${data.conversation}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ input })
+            body: JSON.stringify({ input: query })
         });
         try {
-            input = "";
             const reader = response.body?.pipeThrough(new TextDecoderStream()).getReader();
             if (!reader) throw new Error("No reader");
             while (true) {
@@ -41,13 +43,14 @@
                     content = "";
                     break;
                 }
-                content += value;
+                content += value.replace(/\n/g, "<br>");
             }
         } catch (error) {
             console.error("Error reading response", error);
         } finally {
             thinking = false;
             messages = messages;
+            document.getElementById("input")?.focus();
         }
     }
 </script>
@@ -65,20 +68,20 @@
                     <p class="text-right">&gt; {message.content}</p>
                 {/if}
                 {#if message.type === "response"}
-                    <p>{message.content}</p>
+                    <p>{@html message.content}</p>
                 {/if}
             {/each}
             {#if thinking}
                 <p>Thinking...</p>
             {/if}
-            {content}
+            {@html content}
         </Col>
     </div>
     <div class="d-flex">
         <Col sm="12">
-            <form method="POST" on:submit|preventDefault={handleSubmit} action="?/chat">
+            <form class="bottom" method="POST" on:submit|preventDefault={handleSubmit} action="?/chat">
                 <InputGroup>
-                    <Input type="text" placeholder="Type a message" bind:value={input} disabled={thinking} />
+                    <Input id="input" type="text" placeholder="Type a message" bind:value={input} disabled={thinking} />
                     {#if !thinking}
                         <Button color="primary">Send</Button>
                     {:else}
@@ -90,3 +93,12 @@
     </div>
 
 </div>
+
+<style>
+    .bottom {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        left: 0;
+    }
+</style>
