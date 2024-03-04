@@ -1,48 +1,65 @@
 <script>
     /** @type {import('./$types').PageData} */
     import { Button, Form, FormGroup, Label, Input, FormText } from '@sveltestrap/sveltestrap';
-    export let data;
+    import { enhance } from '$app/forms'
     export let form;
     let radioGroup = 'project_chat_model_secure';
-    const models = ['Llama2', 'Mistral', 'Mixtral', 'Falcon'];
-    let chatModel = models[0];
-    let vectorModel = models[0];
+    radioGroup = 'secure';
+    import models from '$lib/models.json';
+    let chatModel = models[0].value;
+    let vectorModel = models[0].value;
 </script>
 
 <h1>New Project</h1>
 
-<Form method="POST">
+<form method="POST" use:enhance>
     <FormGroup>
         <Label for="projectName">Name</Label>
-        <Input type="text" name="project_name" id="projectName" label="Name" />
+        <Input type="text" name="name" label="Name" value={form?.data?.name ?? ""} />
+        {#if (form?.errors?.name)}
+            <FormText color="danger">{form.errors.name}</FormText>
+        {/if}
     </FormGroup>
-    <FormGroup>
+    <!-- <FormGroup>
         <Label for="projectTags">Tags</Label>
-        <Input type="text" name="project_tags" id="projectTags" />
-    </FormGroup>
+        <Input type="text" name="tags" />
+    </FormGroup> -->
     <FormGroup>
-        <Label for="projectNotes">Notes</Label>
-        <Input type="textarea" name="project_notes" id="projectNotes" />
+        <Label for="projectDescription">Description</Label>
+        <Input type="textarea" name="description" />
+        {#if (form?.errors?.description)}
+            <FormText color="danger">{form.errors.description}</FormText>
+        {/if}
     </FormGroup>
     <FormGroup>
         <Label for="projectVectorModel">Vector Model</Label>
-        <Input type="select" name="project_vector_model" id="projectVectorModel" bind:value={vectorModel}>
+        <Input type="select" name="vector_model" bind:value={vectorModel}>
             {#each models as model}
-                <option>{model}</option>
+                <option value={model.value}>{model.name}</option>
             {/each}
         </Input>
+        {#if (form?.errors?.vector_model)}
+            <FormText color="danger">{form.errors.vector_model}</FormText>
+        {/if}
     </FormGroup>
     <FormGroup>
         <Label for="projectChatModel">Chat Model</Label>
-        <Input type="select" name="project_chat_model" id="projectChatModel" bind:value={chatModel}>
+        <Input type="select" name="chat_model" bind:value={chatModel}>
             {#each models as model}
-                <option>{model}</option>
+                <option value={model.value}>{model.name}</option>
             {/each}
         </Input>
+        {#if (form?.errors?.chat_model)}
+            <FormText color="danger">{form.errors.chat_model}</FormText>
+        {/if}
     </FormGroup>
     <FormGroup check>
-        <Input type="radio" theme="light" bind:group={radioGroup} value="project_secure" label="Secure" />
-        <Input type="radio" theme="light" bind:group={radioGroup} value="project_insecure" label="Insecure - Internet access" />
+        <Input name="security" type="radio" theme="light" bind:group={radioGroup} value="secure" label="Secure" />
+        <Input name="security" type="radio" theme="light" bind:group={radioGroup} value="insecure" label="Insecure - Internet access" />
+        {#if (form?.errors?.security)}
+            <FormText color="danger">{form.errors.security}</FormText>
+        {/if}
     </FormGroup>
+    
     <Button color="primary" type="submit">Submit</Button>
-</Form>
+</form>

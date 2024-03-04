@@ -2,10 +2,10 @@ import fs from 'fs';
 import { glob } from 'glob';
 import { PROJECT_DIR } from "$lib/variables"
 import Project from "$lib/classes/project";
-import type { IProject } from '$lib/types/IProject';
+import type { Project as ProjectType } from '$lib/types/Project.type';
 
 export default class Projects {
-    projects: IProject[];
+    projects: ProjectType[];
 
     constructor() {
         this.projects = [];
@@ -23,9 +23,13 @@ export default class Projects {
         });
     }
 
-    get_project(urlid: string): IProject {
+    get_project(urlid: string): ProjectType {
         const project = this.projects.find(project => project.urlid === urlid);
         if (!project) throw new Error('Project not found');
         return project;
+    }
+
+    get(): ProjectType[] {
+        return this.projects;
     }
 }

@@ -1,0 +1,48 @@
+[
+    {
+        "name": "Falcon",
+        "value": "falcon:7b"
+    },
+    {
+        "name": "Gemma 2b",
+        "value": "gemma:2b",
+        "size": "small",
+        "notes": "Gemma is created by Google. Requires 4GB RAM."
+    },
+    {
+        "name": "Gemma 7b",
+        "value": "gemma:7b",
+        "size": "medium",
+        "notes": "Gemma is created by Google. Requires 8GB RAM."
+    },
+    {
+        "name": "Llama2 7b",
+        "value": "llama2:7b",
+        "size": "medium",
+        "notes": "Llama2 is created by Meta (Facebook). Requires 8GB of RAM"
+    },
+    {
+        "name": "Llama2 13b",
+        "value": "llama2:13b",
+        "size": "large",
+        "notes": "Llama2 is created by Meta (Facebook). Requires 16GB of RAM"
+    },
+    {
+        "name": "Llama2 70b",
+        "value": "llama2:70b",
+        "size": "huge",
+        "notes": "Llama2 is created by Meta (Facebook). Requires 64GB of RAM"
+    },
+    {
+        "name": "Mistral",
+        "value": "mistral:7b",
+        "size": "large",
+        "notes": "Mistral is created by Mistral AI. Requires 12GB of RAM"
+    },
+    {
+        "name": "Mixtral",
+        "value": "mixtral",
+        "size": "huge",
+        "notes": "Mixtral is created by Mistral AI. Requires 46GB of RAM"
+    }
+]

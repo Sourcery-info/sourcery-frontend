@@ -1,9 +1,11 @@
 /** @type {import('./$types').PageServerLoad} */
-import Project from '$lib/classes/project';
+import { randomUUID } from 'node:crypto';
+import { redirect } from '@sveltejs/kit';
 
 export async function load({ params }) {
-    const project = new Project(params.project);
-    return {
-        project: project.get()
-    };
+    const conversation = randomUUID();
+    redirect(307, `/chat/${params.project}/${conversation}`);
 };
+
+export const actions = {
+}

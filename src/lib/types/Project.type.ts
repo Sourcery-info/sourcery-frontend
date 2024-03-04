@@ -1,4 +1,4 @@
-export interface IProject {
+export type Project = {
     urlid: string | null;
     name: string;
     description: string;
