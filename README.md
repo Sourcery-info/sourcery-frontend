@@ -6,6 +6,16 @@ Your private, secure investigative AI
 
 This is the frontend for the Sourcery.info project.
 
+## Environment Variables
+
+PROJECT_DIR: Where to install project files. Eg. /home/user/sourcery/project-files
+
+You can set these environment variables in a `.env` file in the root of the project, or set them at runtime.
+
+```bash
+PROJECT_DIR=/home/user/sourcery/project-files
+```
+
 ## Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
