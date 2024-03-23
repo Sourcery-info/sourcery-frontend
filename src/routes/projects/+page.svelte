@@ -6,9 +6,6 @@
 
 <Container class="mt-4">
     <Row>
-        <Col xs="auto">
-            <Button size="xl" color="primary" href="/new">New Project</Button>
-        </Col>
         <Col>
             <Container>
                 <Row>

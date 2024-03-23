@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
 	import {
 		Collapse,
 		NavbarToggler,
@@ -12,33 +14,36 @@
 		DropdownMenu,
 		DropdownItem
 	} from '@sveltestrap/sveltestrap';
+
+	import logo from '$lib/assets/Sourcery Logo.png';
+
+	export let project;
+	export let version;
+
 	let isOpen = false;
 
     function handleUpdate(event) {
 		isOpen = event?.detail?.isOpen;
 	}
 </script>
-
-<Navbar color="dark" dark expand="sm" container="fluid">
-	<NavbarBrand href="/">Sourcery.info</NavbarBrand>
-	<NavbarToggler on:click={() => (isOpen = !isOpen)} />
-	<Collapse {isOpen} navbar expand="md" on:update={handleUpdate}>
-		<Nav class="ms-auto" navbar>
-			<NavItem>
-				<NavLink href="#components/">Components</NavLink>
-			</NavItem>
-			<NavItem>
-				<NavLink href="https://github.com/sveltestrap/sveltestrap">GitHub</NavLink>
-			</NavItem>
-			<Dropdown nav inNavbar>
-				<DropdownToggle nav caret>Options</DropdownToggle>
-				<DropdownMenu end>
-					<DropdownItem>Option 1</DropdownItem>
-					<DropdownItem>Option 2</DropdownItem>
-					<DropdownItem divider />
-					<DropdownItem>Reset</DropdownItem>
-				</DropdownMenu>
-			</Dropdown>
-		</Nav>
-	</Collapse>
+<div class="navbar-container">
+<Navbar color="none" expand="sm" container="fluid">
+	<NavbarBrand style="height: 40px" href="/"><img class="logo" alt="Sourcery.info" src={logo} /></NavbarBrand>
+	<Nav>
+	{#if project}
+		<NavItem>
+			<NavLink href="/chat/{project.urlid}">{project.name}</NavLink>
+		</NavItem>
+	{/if}
+	</Nav>
+	<Nav class="ms-auto">
+		<NavItem>Version {version}</NavItem>
+	</Nav>
 </Navbar>
+</div>
+
+<style class="less">
+	.logo {
+		height: 100%;
+	}
+</style>

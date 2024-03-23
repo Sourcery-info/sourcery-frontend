@@ -55,29 +55,22 @@
     }
 </script>
 
-<div class="h-100">
-    <div class="d-flex">
-        <Col sm="12">
-            <h1>{data.project?.name}</h1>
-        </Col>
-    </div>
-    <div class="inline-block h-100">
-        <Col sm="12">
-            {#each messages as message}
-                {#if message.type === "input"}
-                    <p class="text-right">&gt; {message.content}</p>
-                {/if}
-                {#if message.type === "response"}
-                    <p>{@html message.content}</p>
-                {/if}
-            {/each}
-            {#if thinking}
-                <p>Thinking...</p>
+<div class="chat-window">
+    <Col sm="12" class="answer">
+        {#each messages as message}
+            {#if message.type === "input"}
+                <p class="text-right">&gt; {message.content}</p>
             {/if}
-            {@html content}
-        </Col>
-    </div>
-    <div class="d-flex">
+            {#if message.type === "response"}
+                <p>{@html message.content}</p>
+            {/if}
+        {/each}
+        {#if thinking}
+            <p>Thinking...</p>
+        {/if}
+        {@html content}
+    </Col>
+    <div class="d-flex question">
         <Col sm="12">
             <form class="bottom" method="POST" on:submit|preventDefault={handleSubmit} action="?/chat">
                 <InputGroup>
@@ -93,12 +86,3 @@
     </div>
 
 </div>
-
-<style>
-    .bottom {
-        position: fixed;
-        bottom: 0;
-        right: 0;
-        left: 0;
-    }
-</style>
